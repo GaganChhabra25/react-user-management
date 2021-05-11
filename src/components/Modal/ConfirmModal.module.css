@@ -1,0 +1,36 @@
+.container {
+  width: 50vw;
+  height: 50vh;
+  position: fixed;
+  width: 50vw;
+  top: 20%;
+  left: 20%;
+  z-index: 100;
+}
+
+.container .headerContent {
+  height: 10%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: centers;
+  color: white;
+}
+
+.container .body {
+  height: 70%;
+  background-color: white;
+}
+
+.container .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  background-color: black;
+}
+
+button {
+  color: black;
+  margin-right: 20px;
+}

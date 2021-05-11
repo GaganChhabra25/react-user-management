@@ -9,6 +9,7 @@ import NotFound from "./components/NotFound/NotFound";
 import AddUser from "./components/User/AddUser";
 import EditUser from "./components/User/EditUser";
 import ViewUser from "./components/User/ViewUser";
+import ConfirmModal from "./components/Modal/ConfirmModal";
 function App() {
   return (
     <Router>

@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import classes from "./Home.module.css";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
+import ConfirmModal from "../Modal/ConfirmModal";
 
 const Home = (props) => {
   const [users, setUsers] = useState([]);
+  const [currentUserId, setCurrentUserId] = useState("");
+  const [showModal, setShowModal] = useState(false);
   let history = useHistory();
 
   useEffect(() => {
@@ -16,14 +19,30 @@ const Home = (props) => {
     setUsers(users.data.reverse());
   };
 
-  const deleteUser = async (userId) => {
-    await axios.delete(`http://localhost:3003/users/${userId}`);
+  const handleModal = (userId) => {
+    setShowModal(true);
+    setCurrentUserId(userId);
+  };
+
+  const handleCancelButton = () => {
+    setShowModal(false);
+  };
+
+  const handleYesButton = async () => {
+    await axios.delete(`http://localhost:3003/users/${currentUserId}`);
     loadUsers();
     history.push("/");
+    setShowModal(false);
   };
 
   return (
     <div className={classes.container}>
+      {showModal && (
+        <ConfirmModal
+          handleCancelButton={handleCancelButton}
+          handleYesButton={handleYesButton}
+        />
+      )}
       <div className={classes.py - 4}>
         <h1>Home Page</h1>
         <table class="table border shadow">
@@ -56,7 +75,7 @@ const Home = (props) => {
                     </Link>
                     <Link
                       class="btn btn-danger"
-                      onClick={() => deleteUser(user.id)}
+                      onClick={() => handleModal(user.id)}
                     >
                       Delete
                     </Link>
